@@ -1,0 +1,60 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Patients</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>Search for Patients</h1>
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<body>
+  <form method="get">
+    <label for="healthID">Search for Patient by Health ID:</label>
+    <input type="text" name="healthID" id="healthID">
+    <button type="submit">Search</button>
+  </form>
+  <form method="get">
+    <button type="submit">View Patients I Care For</button>
+  </form>
+
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Health ID</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patient_list %}
+        <tr>
+          <td>{{p.health_ID}}</td>
+          <td> {{p.Email}} </td>
+          <td>{{p.Age}}</td>
+          <td>{{p.FName}} {{p.LName}}</td>
+          <td>{{p.Phone_num }}</td>
+          <td>{{ p.Address }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <a href="{% url 'healthApp:doctorDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

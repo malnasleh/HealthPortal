@@ -1,0 +1,62 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Prescriptions</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>These are your prescribed medications</h1>
+
+<body>
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Medication DIN</th>
+          <th>Medication Cost</th>
+          <th>Medication Dosage</th>
+          <th>Medication Name</th>
+          <th>Prescribed By</th>
+          <th>Adjusted Cost w/ Insurance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if zippedMedicationPrice %}
+        {% for prescription, adjustedCost in zippedMedicationPrice %}
+        <tr>
+          <td>{{ prescription.Medication_DIN.DIN }}</td>
+          <td>{{ prescription.Medication_DIN.Cost|floatformat:2 }}</td>
+          <td>{{ prescription.Medication_DIN.Dosage }}</td>
+          <td>{{ prescription.Medication_DIN.Name }}</td>
+          <td>Dr. {{prescription.Doctor_Medical_ID_Number.Name}}</td>
+          <td>{{adjustedCost|floatformat:2}}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        {% for prescription in prescribes_list %}
+        <tr>
+          <td>{{ prescription.Medication_DIN.DIN }}</td>
+          <td>{{ prescription.Medication_DIN.Cost }}</td>
+          <td>{{ prescription.Medication_DIN.Dosage }}</td>
+          <td>{{ prescription.Medication_DIN.Name }}</td>
+          <td>Dr. {{prescription.Doctor_Medical_ID_Number.Name}}</td>
+          <td> Select a policy to see adjusted costs </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+  <form method="post" action="{% url 'healthApp:prescriptions' %}">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit" class="submitButton">Change Coverage</button>
+  </form>
+  <a href="{% url 'healthApp:patientDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

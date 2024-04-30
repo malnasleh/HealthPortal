@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Insurance Coverage</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>These are your current Insurance Policies</h1>
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<body>
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Insurance Company</th>
+          <th>Policy ID</th>
+          <th>Monthly Cost</th>
+          <th>Coverage %</th>
+          <th>Medications Covered</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for coverage in coverage_list %}
+        <tr>
+          <td>{{ coverage.Insurance_name.Insurance_name }}</td>
+          <td>{{ coverage.Policy_id.Policy_id }}</td>
+          <td>${{ coverage.Policy_id.Monthly_Cost }}</td>
+          <td>{{ coverage.Policy_id.Coverage }}%</td>
+          <td>{% for cover in coverage.Policy_id.covers_set.all %}
+            <p>{{ cover.DIN}} </p>
+            {% endfor %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <form method="post" action="{% url 'healthApp:coverageInfo' %}">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit" name="add_button" class="submitButton">Add Insurance</button>
+    <button type="submit" name="delete_button" class="removeButton">Delete Insurance</button>
+  </form>
+  <a href="{% url 'healthApp:patientDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Prescriptions</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>Search for patient's prescribed medications</h1>
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<body>
+  <form method="get">
+    <label for="healthID">Enter Health ID:</label>
+    <input type="text" name="healthID" id="healthID">
+    <button type="submit">Search</button>
+  </form>
+  <form method="get">
+    <button type="submit">View Prescriptions I Wrote</button>
+  </form>
+
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Prescribed By</th>
+          <th>Written for</th>
+          <th>Patient Health ID</th>
+          <th>Medication DIN</th>
+          <th>Medication Cost</th>
+          <th>Medication Dosage</th>
+          <th>Medication Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for prescription in doctor_prescribes_list %}
+        <tr>
+          <td>Dr. {{prescription.Doctor_Medical_ID_Number.Name}}</td>
+          <td> {{prescription.Patient_Health_ID.FName}} {{prescription.Patient_Health_ID.LName}} </td>
+          <td>{{prescription.Patient_Health_ID.health_ID}}</td>
+          <td>{{ prescription.Medication_DIN.DIN }}</td>
+          <td>{{ prescription.Medication_DIN.Cost }}</td>
+          <td>{{ prescription.Medication_DIN.Dosage }}</td>
+          <td>{{ prescription.Medication_DIN.Name }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <form method="post" action="{% url 'healthApp:doctorPrescriptionInfo' %}">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit" name="add_button" class="submitButton">Add Prescription</button>
+  </form>
+  <a href="{% url 'healthApp:doctorDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

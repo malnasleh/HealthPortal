@@ -1,0 +1,48 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Hospitals</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>Hospitals</h1>
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<body>
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for h in hospital_list %}
+        <tr>
+          <td>{{h.Name}}</td>
+          <td> {{h.Address}} </td>
+          <td>{{h.Phone_num}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <form action="WorksAtInfo">
+    <input type="submit" value="View Only Hospitals I Work At" />
+  </form>
+  <a href="{% url 'healthApp:doctorDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

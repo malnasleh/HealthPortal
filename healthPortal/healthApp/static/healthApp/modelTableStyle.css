@@ -1,0 +1,78 @@
+/* static/css/style.css */
+
+.table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+  text-align: center;
+  /* Center the table on the page */
+}
+
+.model-table {
+  width: 90%;
+  /* Set the width of the table */
+  border-collapse: collapse;
+}
+
+.model-table th,
+.model-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  /* Increase padding for more spacing between columns */
+  text-align: left;
+}
+
+.model-table th {
+  background-color: #f2f2f2;
+}
+
+button,
+a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #3498db;
+    color: #fff;
+    border: 1px solid #2980b9;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover,
+a.button:hover {
+    background-color: #2980b9;
+}
+
+.submitButton {
+  background-color: green;
+  color: #fff; 
+  padding: 8px; 
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+.removeButton {
+  background-color: maroon;
+  color: #fff; 
+  padding: 8px; 
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.messages li.error {
+  background-color: #f8d7da; /* Light red background */
+  color: #721c24; /* Dark red text color */
+  border: 1px solid #f5c6cb; /* Darker red border */
+}

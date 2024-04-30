@@ -1,0 +1,65 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Update</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>Patient info</h1>
+
+<body>
+  <form method="post" action="{% url 'healthApp:healthApp-updateInfo' %}">
+    {% csrf_token %}
+
+    {% if form.errors %}
+    <p style="color: red;">Please correct the errors below.</p>
+    {% endif %}
+
+    <label for="{{ form.FName.id_for_label }}">First Name:</label>
+    {{ form.FName }}
+    {{ form.FName.errors }}
+    <br />
+    <br />
+
+    <label for="{{ form.MName.id_for_label }}">Middle Name:</label>
+    {{ form.MName }}
+    {{ form.MName.errors }}
+    <br />
+    <br />
+
+    <label for="{{ form.LName.id_for_label }}">Last Name:</label>
+    {{ form.LName }}
+    {{ form.LName.errors }}
+    <br />
+    <br />
+
+    <label for="{{ form.Phone_num.id_for_label }}">Phone #:</label>
+    {{ form.Phone_num }}
+    {{ form.Phone_num.errors }}
+    <br />
+    <br />
+
+    <label for="{{ form.Email.id_for_label }}">Email:</label>
+    {{ form.Email }}
+    {{ form.Email.errors }}
+    <br />
+    <br />
+
+    <label for="{{ form.Age.id_for_label }}">Age:</label>
+    {{ form.Age }}
+    {{ form.Age.errors }}
+    <br />
+    <br />
+
+    <label for="{{ form.Address.id_for_label }}">Address:</label>
+    {{ form.Address }}
+    {{ form.Address.errors }}
+    <br />
+    <br />
+
+    <button type="submit">Update Profile</button>
+  </form>
+</body>
+
+</html>

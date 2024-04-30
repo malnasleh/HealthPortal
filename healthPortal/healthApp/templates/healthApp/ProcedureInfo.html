@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Procedures</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>These are Your Procedures</h1>
+
+<body>
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Duration (hours)</th>
+          <th>Name</th>
+          <th>Result</th>
+          <th>Hospital</th>
+          <th>Overseeing Doctor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for procedure in procedure_list %}
+        <tr>
+          <td>{{ procedure.Procedure_Date }}</td>
+          <td>{{ procedure.Procedure_Type }}</td>
+          <td>{{ procedure.Duration_hours }}</td>
+          <td>{{ procedure.Name }}</td>
+          <td>{{ procedure.Result }}</td>
+          <td>{{ procedure.Hospital_ID.Name }}</td>
+          <td>{{ procedure.oversees_set.all|join:", " }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <a href="{% url 'healthApp:patientDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Doctors</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>These are the doctors that care for you</h1>
+
+<body>
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone #</th>
+          <th>Email</th>
+          <th>Specialties</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for care_for in care_relationship_list %}
+        <tr>
+          <td>{{ care_for.Doctor_Medical_ID_Number.Name }}</td>
+          <td>{{ care_for.Doctor_Medical_ID_Number.Phone_num }}</td>
+          <td>{{ care_for.Doctor_Medical_ID_Number.Email}}</td>
+          <td>{{care_for.Doctor_Medical_ID_Number.doctor_specialties_set.all|join:", " }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <a href="{% url 'healthApp:patientDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

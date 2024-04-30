@@ -1,0 +1,41 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Drug Manufacturers</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>Drug Manufacturers</h1>
+
+<body>
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Phone_num</th>
+          <th>Drugs Manufactured</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for drug_manufacturer in drug_manufacturer_list %}
+        <tr>
+          <td>{{ drug_manufacturer.Id }}</td>
+          <td>{{ drug_manufacturer.Name }}</td>
+          <td>{{ drug_manufacturer.Address }}</td>
+          <td>{{ drug_manufacturer.Phone_num }}</td>
+          <td>{{ drug_manufacturer.manufactured_by_set.all|join:", " }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <a href="{% url 'healthApp:doctorDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

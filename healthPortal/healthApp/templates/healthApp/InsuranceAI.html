@@ -1,0 +1,43 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Insurance AI</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>Insurance AI</h1>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<h3>Based on your current insurance policies, here is what you expect to pay depending on how much coverage you want.</h3>
+<body>
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Desired Coverage</th>
+          <th>Expected Monthly Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for coverage, cost in coverage_list %}
+        <tr>
+          <td>{{ coverage }}%</td>
+          <td>${{ cost }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {{info|linebreaks}}
+  <a href="{% url 'healthApp:patientDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <title>Prescriptions</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>Oversees</h1>
+    
+<body>
+  <div class="table-container">
+    <table class="model-table">
+        <thead>
+          <tr>
+            <th>Procedure_ID</th>
+            <th>Doctor_Medical_ID_Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for oversee in oversees_list %}
+            <tr>
+              <td>{{ oversee.Procedure_ID.Procedure_ID }}</td>
+              <td>{{ oversee.Doctor_Medical_ID_Number.Medical_ID_Number }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <a href="{% url 'healthApp:patientDashboard' %}">
+      <button type="button">Return to Dashboard</button>
+    </a>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <title>Personal Info</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+    <style>
+
+    </style>
+</head>
+<h1>Personal Information</h1>
+
+<body>
+    <div class="table-container">
+        <table class="model-table">
+            <thead>
+                <tr>
+                    <th>health ID</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Phone #</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patientInfo %}
+                <tr>
+                    <td>{{ patient.health_ID }}</td>
+                    <td>{{ patient.FName }}</td>
+                    <td>{{ patient.MName }}</td>
+                    <td>{{ patient.LName }}</td>
+                    <td>{{ patient.Age }}</td>
+                    <td>{{ patient.Email }}</td>
+                    <td>{{ patient.Phone_num }}</td>
+                    <td>{{ patient.Address }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'healthApp:healthApp-updateInfo' %}">
+        <button type="button">Update Personal Info</button>
+    </a>
+    <br/>
+    <a href="{% url 'healthApp:patientDashboard' %}">
+        <button type="button">Return to Dashboard</button>
+    </a>
+</body>
+
+</html>

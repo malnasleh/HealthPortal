@@ -1,0 +1,48 @@
+form {
+    margin: 10px;
+}
+
+body {
+    background-color: #f2f7fc;
+}
+
+input[type="submit"],
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #3498db;
+    color: #fff;
+    border: 1px solid #2980b9;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #2980b9;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.button-group {
+    margin: 10px;
+    text-align: center;
+}
+
+.logout-button button {
+    background-color: #e74c3c;
+    border: 1px solid #c0392b;
+}
+
+.logout-button button:hover {
+    background-color: #c0392b;
+}

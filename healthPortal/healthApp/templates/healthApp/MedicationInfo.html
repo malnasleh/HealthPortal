@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <title>Medications</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>Medication</h1>
+
+<body>
+  <div class="table-container">
+    <table class="model-table">
+        <thead>
+          <tr>
+            <th>DIN</th>
+            <th>Cost</th>
+            <th>Dosage</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for medication in medication_list %}
+            <tr>
+              <td>{{ medication.DIN }}</td>
+              <td>{{ medication.Cost }}</td>
+              <td>{{ medication.Dosage }}</td>
+              <td>{{ medication.Name }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <a href="{% url 'healthApp:doctorDashboard' %}">
+      <button type="button">Return to Dashboard</button>
+    </a>
+</body>
+</html>

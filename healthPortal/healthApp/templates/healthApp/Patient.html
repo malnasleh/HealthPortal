@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+    <title>Patient Homepage</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'healthApp/dashboardStyle.css' %}">
+</head>
+<h1>
+    Welcome to Your Health Portal {{currentPatient.FName}} {{currentPatient.LName}} 
+</h1>
+
+<body>
+    <div class="button-container">
+        <div class="button-group">
+            <form action="PatientInfo">
+                <input type="submit" value="View Patient Info" />
+            </form>
+            <form action="DoctorInfo">
+                <input type="submit" value="View your Doctors" />
+            </form>
+            <form action="ProcedureInfo">
+                <input type="submit" value="View your Procedures" />
+            </form>
+        </div>
+
+        <div class="button-group">
+            <form action="InsuranceCoverageInfo">
+                <input type="submit" value="View your Insurance Coverage" />
+            </form>
+            <form action="Prescriptions">
+                <input type="submit" value="View Prescriptions" />
+            </form>
+            <form action="InsuranceAI">
+                <input type="submit" value="Insurance AI" />
+            </form>
+        </div>
+        <div class="logout-button">
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

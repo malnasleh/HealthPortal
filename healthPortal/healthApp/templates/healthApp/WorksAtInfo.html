@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>Your Hospitals</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'healthApp/modelTableStyle.css' %}">
+</head>
+<h1>These are the hospitals you work for</h1>
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<body>
+  <div class="table-container">
+    <table class="model-table">
+      <thead>
+        <tr>
+          <th>Hospital Name</th>
+          <th>Phone Number</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for works_at in works_at_list %}
+        <tr>
+          <td>{{ works_at.Hospital_ID.Name }}</td>
+          <td>{{ works_at.Hospital_ID.Phone_num }}</td>
+          <td>{{ works_at.Hospital_ID.Address }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <form method="post" action="{% url 'healthApp:worksAtInfo' %}">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit" name="add_button" class="submitButton">Add Hospital</button>
+    <button type="submit" name="delete_button" class="removeButton">Delete Hospital</button>
+  </form>
+
+  <form action="ViewHospitals">
+    <input type="submit" value="View All Hospitals" />
+  </form>
+
+  <a href="{% url 'healthApp:doctorDashboard' %}">
+    <button type="button">Return to Dashboard</button>
+  </a>
+  
+</body>
+
+</html>
