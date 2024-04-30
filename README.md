@@ -1,5 +1,3 @@
-# 471Project
-Repository for CPSC 471 final project. Health info portal.
 # Dependencies
 
 We have successfully run our program with the following:
